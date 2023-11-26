@@ -1,0 +1,100 @@
+{% extends 'homebase.html' %}
+{%  load static %}
+{% block title %} {{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+
+{% block head %} <link rel="shortcut icon" type="image/x-icon" href="{{ setting.icon.url }}"> {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %}  {% endblock %}
+
+{% block body %} 
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">İLETİŞİM</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">İletişim</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Contact For Any Queries</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form">
+                    <div id="success">
+                             {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                    </div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            {{ form.name }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {{ form.email }}
+                           <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                           {{ form.subject }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                           {{ form.message }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-5">
+                {{ setting.contact | safe }}
+                <div class="d-flex flex-column mb-3">
+                    <h5 class="font-weight-semi-bold mb-3">Store 1</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <h5 class="font-weight-semi-bold mb-3">Store 2</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% comment %} <!-- Contact End -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">BTK DJANGO KURSU ILETISIM</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            {{ setting.contact | safe}}
+        </div>
+    </div>
+    <!-- Contact End --> {% endcomment %}
+
+{% endblock %}
